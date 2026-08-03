@@ -1,39 +1,37 @@
 # Saylog Design Skills
 
-Dou 제품의 디자인·UI/UX 이슈 관리·사용자 매뉴얼 제작에 사용하는 private agent skills 저장소입니다.
+Dou 제품의 디자인·UI/UX 이슈 관리·사용자 매뉴얼 제작에 사용하는 public agent skills 저장소입니다.
 
-## 설치 전제조건
+## 설치
 
-이 저장소는 private GitHub 저장소입니다. 설치하는 계정에 douinc/dou-design-skills 읽기 권한이 있어야 하며, GitHub SSH 키 또는 Git credential이 먼저 설정되어 있어야 합니다.
+이 저장소는 public GitHub 저장소이므로 별도 저장소 권한이나 SSH 인증 없이 skill을 설치할 수 있습니다.
 
 ### 권장 설치 방법
 
-SSH 인증을 사용하는 경우:
-
-~~~bash
-npx skills add git@github.com:douinc/dou-design-skills.git --skill <skill-name>
-~~~
-
-예:
-
-~~~bash
-npx skills add git@github.com:douinc/dou-design-skills.git --skill dou-product-design
-~~~
-
-### 저장소 shorthand
-
-기존 npx skills 사용 규칙에 따라 다음 형식도 사용할 수 있습니다.
+저장소 shorthand:
 
 ~~~bash
 npx skills add douinc/dou-design-skills@<skill-name>
 ~~~
 
-private 저장소를 clone할 수 있도록 인증되어 있지 않다면 shorthand가 실패할 수 있습니다. 그 경우 SSH URL 방식을 사용하세요.
+예시:
+
+~~~bash
+npx skills add douinc/dou-design-skills@dou-product-design
+~~~
+
+### Git URL 설치
+
+전체 Git URL을 사용하려면 HTTPS 방식을 권장합니다.
+
+~~~bash
+npx skills add https://github.com/douinc/dou-design-skills.git --skill <skill-name>
+~~~
 
 dou-product-design에서 GitHub 이슈 연결 작업까지 하려면 두 skill을 함께 설치합니다.
 
 ~~~bash
-npx skills add git@github.com:douinc/dou-design-skills.git --skill dou-product-design --skill saylog-uxui-issues
+npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-product-design --skill saylog-uxui-issues
 ~~~
 
 ## Skill 목록
