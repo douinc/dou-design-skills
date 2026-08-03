@@ -2,29 +2,29 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Move the three Dou-product-dependent skills into `saylog-design-skills`, remove them from `agent-skills`, and document installation and external private dependencies in both repositories.
+**Goal:** Move the three Dou-product-dependent skills into `dou-design-skills`, remove them from `agent-skills`, and document installation and external private dependencies in both repositories.
 
-**Architecture:** Preserve each skill directory as a self-contained unit under `saylog-design-skills/skills/`. Keep the general-purpose skills in `agent-skills` and remove only the moved entries from its README. The new README is the source of truth for private installation and product-repository access requirements.
+**Architecture:** Preserve each skill directory as a self-contained unit under `dou-design-skills/skills/`. Keep the general-purpose skills in `agent-skills` and remove only the moved entries from its README. The new README is the source of truth for private installation and product-repository access requirements.
 
 **Tech Stack:** Git repositories, Markdown, `npx skills` CLI, shell-based file and link verification.
 
 ## Global Constraints
 
-- Move exactly `dou-product-design`, `dou-uxui-issues`, and `manual-authoring`, including every nested file.
+- Move exactly `dou-product-design`, `saylog-uxui-issues`, and `saylog-manual-authoring`, including every nested file.
 - Do not modify or delete any other skill in `agent-skills`.
 - Do not fetch, modify, or commit changes to external product repositories.
 - Use SSH installation examples for the private repository.
 - State that `npx skills add` does not automatically install or authenticate external private repositories referenced by a skill.
-- Keep the existing MIT license in `agent-skills`; add an MIT license file to `saylog-design-skills` only if the target repository does not already have one.
+- Keep the existing MIT license in `agent-skills`; add an MIT license file to `dou-design-skills` only if the target repository does not already have one.
 
 ---
 
 ### Task 1: Move the three dependent skill directories
 
 **Files:**
-- Move from `/Users/initred/Code/agent-skills/skills/dou-product-design/` to `/Users/initred/Code/saylog-design-skills/skills/dou-product-design/`
-- Move from `/Users/initred/Code/agent-skills/skills/dou-uxui-issues/` to `/Users/initred/Code/saylog-design-skills/skills/dou-uxui-issues/`
-- Move from `/Users/initred/Code/agent-skills/skills/manual-authoring/` to `/Users/initred/Code/saylog-design-skills/skills/manual-authoring/`
+- Move from `/Users/initred/Code/agent-skills/skills/dou-product-design/` to `/Users/initred/Code/dou-design-skills/skills/dou-product-design/`
+- Move from `/Users/initred/Code/agent-skills/skills/dou-uxui-issues/` to `/Users/initred/Code/dou-design-skills/skills/saylog-uxui-issues/`
+- Move from `/Users/initred/Code/agent-skills/skills/manual-authoring/` to `/Users/initred/Code/dou-design-skills/skills/saylog-manual-authoring/`
 
 **Interfaces:**
 - Produces the three complete skill directories in the private repository.
@@ -35,7 +35,7 @@
 Run:
 
 ```bash
-mkdir -p /Users/initred/Code/saylog-design-skills/skills
+mkdir -p /Users/initred/Code/dou-design-skills/skills
 ```
 
 - [ ] **Step 2: Move each exact directory**
@@ -43,9 +43,9 @@ mkdir -p /Users/initred/Code/saylog-design-skills/skills
 Run:
 
 ```bash
-mv /Users/initred/Code/agent-skills/skills/dou-product-design /Users/initred/Code/saylog-design-skills/skills/
-mv /Users/initred/Code/agent-skills/skills/dou-uxui-issues /Users/initred/Code/saylog-design-skills/skills/
-mv /Users/initred/Code/agent-skills/skills/manual-authoring /Users/initred/Code/saylog-design-skills/skills/
+mv /Users/initred/Code/agent-skills/skills/dou-product-design /Users/initred/Code/dou-design-skills/skills/
+mv /Users/initred/Code/agent-skills/skills/dou-uxui-issues /Users/initred/Code/dou-design-skills/skills/saylog-uxui-issues
+mv /Users/initred/Code/agent-skills/skills/manual-authoring /Users/initred/Code/dou-design-skills/skills/saylog-manual-authoring
 ```
 
 - [ ] **Step 3: Verify the move before documentation edits**
@@ -53,9 +53,9 @@ mv /Users/initred/Code/agent-skills/skills/manual-authoring /Users/initred/Code/
 Run:
 
 ```bash
-test -f /Users/initred/Code/saylog-design-skills/skills/dou-product-design/SKILL.md
-test -f /Users/initred/Code/saylog-design-skills/skills/dou-uxui-issues/SKILL.md
-test -f /Users/initred/Code/saylog-design-skills/skills/manual-authoring/SKILL.md
+test -f /Users/initred/Code/dou-design-skills/skills/dou-product-design/SKILL.md
+test -f /Users/initred/Code/dou-design-skills/skills/saylog-uxui-issues/SKILL.md
+test -f /Users/initred/Code/dou-design-skills/skills/saylog-manual-authoring/SKILL.md
 test ! -e /Users/initred/Code/agent-skills/skills/dou-product-design
 test ! -e /Users/initred/Code/agent-skills/skills/dou-uxui-issues
 test ! -e /Users/initred/Code/agent-skills/skills/manual-authoring
@@ -88,11 +88,11 @@ Expected: only the generic `douinc/agent-skills@<skill-name>` installation patte
 ### Task 3: Write the private repository README
 
 **Files:**
-- Create: `/Users/initred/Code/saylog-design-skills/README.md`
+- Create: `/Users/initred/Code/dou-design-skills/README.md`
 
 **Interfaces:**
-- Documents direct installation from `douinc/saylog-design-skills`.
-- Documents the `dou-product-design` → `dou-uxui-issues` relationship.
+- Documents direct installation from `douinc/dou-design-skills`.
+- Documents the `dou-product-design` → `saylog-uxui-issues` relationship.
 - Documents external product-repository permissions for all three skills.
 
 - [ ] **Step 1: Add repository purpose and access requirements**
@@ -100,7 +100,7 @@ Expected: only the generic `douinc/agent-skills@<skill-name>` installation patte
 Explain that the repository is private and users must have GitHub read access. Show the reliable SSH form:
 
 ```bash
-npx skills add git@github.com:douinc/saylog-design-skills.git --skill <skill-name>
+npx skills add git@github.com:douinc/dou-design-skills.git --skill <skill-name>
 ```
 
 Also show the shorthand form requested by the repository’s existing conventions, with a note that the user’s GitHub authentication must already be able to clone the private repository.
@@ -123,7 +123,7 @@ Document the `skills/<skill-name>/SKILL.md` layout, how to add or update a skill
 Run:
 
 ```bash
-find /Users/initred/Code/saylog-design-skills/skills/dou-product-design /Users/initred/Code/saylog-design-skills/skills/dou-uxui-issues /Users/initred/Code/saylog-design-skills/skills/manual-authoring -type f | sort
+find /Users/initred/Code/dou-design-skills/skills/dou-product-design /Users/initred/Code/dou-design-skills/skills/saylog-uxui-issues /Users/initred/Code/dou-design-skills/skills/saylog-manual-authoring -type f | sort
 ```
 
 Confirm that all files observed in the source before migration are present in the target.
@@ -134,7 +134,7 @@ Run:
 
 ```bash
 git -C /Users/initred/Code/agent-skills diff --check
-git -C /Users/initred/Code/saylog-design-skills diff --check
+git -C /Users/initred/Code/dou-design-skills diff --check
 ```
 
 Expected: no output and exit code 0.
@@ -144,9 +144,9 @@ Expected: no output and exit code 0.
 Run:
 
 ```bash
-rg -n 'skills/(dou-product-design|dou-uxui-issues|manual-authoring)|agent-skills@(dou-product-design|dou-uxui-issues|manual-authoring)' /Users/initred/Code/agent-skills/README.md
+rg -n 'skills/(dou-product-design|saylog-uxui-issues|saylog-manual-authoring)|agent-skills@(dou-product-design|saylog-uxui-issues|saylog-manual-authoring)' /Users/initred/Code/agent-skills/README.md
 git -C /Users/initred/Code/agent-skills status --short
-git -C /Users/initred/Code/saylog-design-skills status --short
+git -C /Users/initred/Code/dou-design-skills status --short
 ```
 
 Expected: the first command returns no matches; Git status shows only the three source deletions, source README change, target skill files, target README, and the already committed design/plan documents.

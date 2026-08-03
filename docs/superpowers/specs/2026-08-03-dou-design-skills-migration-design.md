@@ -2,15 +2,15 @@
 
 ## Goal
 
-분산된 `agent-skills` 저장소에서 Dou 제품에 직접 의존하는 세 skill을 별도 private 저장소인 `saylog-design-skills`로 이동하고, 두 저장소의 README가 실제 설치 경로와 의존성을 정확히 설명하도록 정리한다.
+분산된 `agent-skills` 저장소에서 Dou 제품에 직접 의존하는 세 skill을 별도 private 저장소인 `dou-design-skills`로 이동하고, 두 저장소의 README가 실제 설치 경로와 의존성을 정확히 설명하도록 정리한다.
 
 ## Scope
 
 새 저장소로 이동하는 skill은 다음 세 가지다.
 
 - `dou-product-design/`
-- `dou-uxui-issues/`
-- `manual-authoring/`
+- `saylog-uxui-issues/`
+- `saylog-manual-authoring/`
 
 각 디렉터리의 `SKILL.md`, 참조 문서, 가이드, assets, scripts, agent metadata를 함께 보존한다. 원본 저장소의 다른 skill은 유지한다.
 
@@ -19,13 +19,13 @@
 새 저장소는 다음 구조를 갖는다.
 
 ```text
-saylog-design-skills/
+dou-design-skills/
 ├── README.md
-├── docs/superpowers/specs/2026-08-03-saylog-design-skills-migration-design.md
+├── docs/superpowers/specs/2026-08-03-dou-design-skills-migration-design.md
 └── skills/
     ├── dou-product-design/
-    ├── dou-uxui-issues/
-    └── manual-authoring/
+    ├── saylog-uxui-issues/
+    └── saylog-manual-authoring/
 ```
 
 원본 `agent-skills/README.md`에서는 이동된 세 skill의 목록 행과 설치 안내를 제거해 깨진 링크가 남지 않게 한다.
@@ -33,9 +33,9 @@ saylog-design-skills/
 ## Dependency model
 
 - `dou-product-design`은 Dou 제품의 `dou-design-system`과 제품 저장소의 `docs/design-harness.md`, `docs/ia.md`를 작업 전제조건으로 사용한다.
-- GitHub 이슈를 연결하는 경우 `dou-uxui-issues`의 규칙과 GitHub 접근 권한이 필요하다.
-- `dou-uxui-issues`는 Saylog/Carevoice 관련 private GitHub 저장소와 제품 영역별 디자인 기준 저장소를 참조한다.
-- `manual-authoring`은 Saylog 매뉴얼 작업 시 `douinc/carevoice`의 문서와 `douinc/saylog-manuals` 저장소를 참조한다.
+- GitHub 이슈를 연결하는 경우 `saylog-uxui-issues`의 규칙과 GitHub 접근 권한이 필요하다.
+- `saylog-uxui-issues`는 Saylog/Carevoice 관련 private GitHub 저장소와 제품 영역별 디자인 기준 저장소를 참조한다.
+- `saylog-manual-authoring`은 Saylog 매뉴얼 작업 시 `douinc/carevoice`의 문서와 `douinc/saylog-manuals` 저장소를 참조한다.
 - `npx skills add`는 새 저장소의 skill 파일을 설치할 뿐, 위 외부 private 저장소를 자동으로 설치하거나 인증하지 않는다. README에 이 권한 요구사항을 명시한다.
 
 ## README content
