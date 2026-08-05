@@ -64,10 +64,10 @@ GitHub 이슈 생성·수정, 하위 이슈 연결, Project 상태 변경에는 
 
 ### saylog-manual-authoring
 
-Saylog 매뉴얼 작업에는 다음 private 저장소가 필요합니다.
+Saylog 매뉴얼 작업에는 다음이 필요합니다.
 
-- douinc/carevoice의 docs/shared 컨텍스트 문서
-- douinc/saylog-manuals의 매뉴얼 소스·산출물
+- douinc/saylog wiki의 컨텍스트 문서 (`git clone https://github.com/douinc/saylog.wiki.git`). 예전 경로였던 douinc/carevoice의 docs/shared는 없어졌습니다.
+- douinc/saylog-manuals의 매뉴얼 소스·산출물 (private)
 
 또한 PDF 렌더링과 시각 검증을 위해 macOS의 Chrome과 Quartz 환경이 필요합니다.
 

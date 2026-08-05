@@ -22,12 +22,14 @@
 ## 레지스트리
 
 ### 새록 (Saylog) — carevoice
-- **컨텍스트 폴더(매번 읽기):** `https://github.com/douinc/carevoice/tree/main/docs/shared`
-  — 폴더 전체를 읽는다(README, GLOSSARY, STATUS, 그리고 policies/guides/features/
-  discussions/issues 하위 폴더). 특정 파일명에 의존하지 말고, pull 후 최신 내용을
-  훑는다.
-  - carevoice 리포를 로컬에 clone해 뒀다면 그 `docs/shared`를 읽어도 된다(경로는
-    각자 환경마다 다름; 읽기 전에 `git pull`로 최신화). 없으면 위 git URL에서 받는다.
+- **컨텍스트(매번 읽기):** `https://github.com/douinc/saylog/wiki` — 새록 지식 베이스이며
+  장기 보존 지식의 **SSOT**다. 전체를 훑는다(Home, GLOSSARY, STATUS, 그리고
+  policies/guides/features/discussions/issues 하위 폴더). 특정 파일명에 의존하지 말고
+  최신 내용을 읽는다.
+  - 위키는 git으로 통째로 받을 수 있다: `git clone https://github.com/douinc/saylog.wiki.git`
+    (이미 받아 뒀으면 읽기 전에 `git pull`로 최신화).
+  - ⚠️ 예전 경로 `carevoice/docs/shared`는 **없어졌다.** carevoice 저장소에는 작업
+    수명주기 문서만 남는다 — 그 경로를 찾지 말고 위키를 읽는다.
 - **제품:** 모바일 앱 · 웹 콘솔 · **새록 라이브**(Windows/macOS 데스크탑 전사 앱)는
   각각 별도 파트이며 하나의 PDF로 함께 배포한다. 콘솔 URL: `console.carevoice.io`.
   - 새록 라이브 설계 SSOT: `carevoice/docs/superpowers/specs/2026-07-20-saylog-live-desktop-design.md`
