@@ -4,7 +4,7 @@ description: Use when designing, wireframing, or directly implementing a screen 
 metadata:
   author: minsu
   email: minsu@dou.so
-  version: 1.7.0
+  version: 1.8.0
 ---
 
 # Dou Product Design Workflow
@@ -217,8 +217,25 @@ GitHub 작업 이슈 연결 (부모 이슈 링크가 있을 때)
 1. `docs/screens/[페이지명]/wireframe.html 파일을 열어 확인해 주세요` 전달
 2. `docs/screens/[페이지명]/README.md` 파일 상단(제목 바로 아래)에 와이어프레임 링크 추가:
    ```markdown
-   **와이어프레임:** [`./wireframe.html`](./wireframe.html) — 같은 폴더. 파일로 바로 열기 또는 GitHub에서 열기.
+   **와이어프레임:** [`./wireframe.html`](./wireframe.html) — 같은 폴더. ⑤ 구조 컨펌 시점의 기록.
    ```
+
+### 와이어프레임의 수명 — ⑥ 구현에 들어가면 끝난다 (필수)
+
+와이어프레임은 **⑤ 구조 컨펌을 받기 위한 도구**다. 컨펌이 끝나고 ⑥ 구현으로 넘어간 순간
+**그 시점의 합의 기록으로 동결**되고, 이후로는 유지보수 대상이 아니다.
+
+⑥ 이후에 들어오는 모든 피드백은 **구현 코드와 `README.md`에만** 반영한다.
+
+- 와이어프레임 HTML을 고치지 않는다.
+- **"와이어프레임도 갱신할까요?"를 묻지 않는다.** 묻는 것 자체가 담당자의 시간을 쓴다.
+- 화면이 와이어프레임과 달라졌다는 사실을 보고하지 않는다 — 달라지는 게 정상이다.
+- 진행 상황 체크리스트의 `구조 컨펌`이 체크돼 있으면 이미 동결된 것으로 본다.
+
+**단 하나의 예외**: 담당자가 **명시적으로** 와이어프레임 갱신을 요청한 경우. 그때만 고친다.
+
+구조 자체가 뒤집히는 큰 변경(화면이 통째로 새로 설계되는 수준)이라면 와이어프레임을 고치는
+게 아니라 ①~⑤를 다시 밟을 일이다 — 그건 담당자가 정한다.
 
 ---
 
@@ -374,6 +391,10 @@ bun run typecheck
 **커밋 전 업데이트:**
 1. `docs/ia.md` — 새 화면을 flowchart에 추가
 2. `README.md` — 새 화면이나 주요 컴포넌트가 생겼다면 해당 섹션 업데이트
+3. `docs/screens/[페이지명]/README.md` — 구현하며 정해진 데이터·동작 규칙, 최종 문구
+
+**`wireframe.html`은 건드리지 않는다** — ⑥ 구현에 들어간 시점에 동결됐다(③ 참조).
+갱신 여부를 묻지도 않는다.
 
 ```bash
 git add app/ components/ docs/ia.md README.md
@@ -393,3 +414,5 @@ git push
 | 와이어프레임 문구 ux-writing 미적용 | 버튼·배너 문구를 직접 작성 | 지정된 ux-writing 스킬 invoke 후 작성 |
 | docs 파일 미생성 | 스펙·설계 컨펌 후 바로 다음 단계로 진행 | 컨펌 즉시 `docs/screens/[페이지명]/README.md` 생성·업데이트 |
 | README 업데이트 누락 | 구현 완료 후 커밋할 때 README 빠뜨림 | 커밋 전 `README.md` 구현된 화면·컴포넌트 섹션 업데이트 |
+| 구현 중 와이어프레임을 계속 고침 | 피드백 하나 반영할 때마다 `wireframe.html`도 같이 수정 | ⑥에 들어가면 와이어프레임은 동결이다. 구현과 화면별 `README.md`에만 반영한다 |
+| 와이어프레임 갱신 여부를 물음 | "와이어프레임도 4단계로 다시 그릴까요?" | 묻지 않는다. 담당자가 명시적으로 요청할 때만 고친다 |
