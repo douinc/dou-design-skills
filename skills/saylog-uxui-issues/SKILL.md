@@ -1,6 +1,6 @@
 ---
 name: saylog-uxui-issues
-description: Use when 새록(saylog) GitHub 이슈를 만들거나 고치거나 상태를 바꿀 때. **이슈 본문 작성·수정, 이슈 상태 변경(UI/UX Progress·UI/UX Done), 프로젝트 필드 설정, 디자인 작업 완료 정리, 하위 이슈 생성·Parent 연결도 전부 포함합니다** — 새 이슈를 만들 때만이 아닙니다. `gh issue create/edit/comment`, `gh project item-edit` 를 새록 저장소에 쓰려고 하면 먼저 이 스킬을 부릅니다. 그 밖의 트리거: 디자인 하네스·프로토타입·스크린샷과 실제 제품 구현 비교, 디자인 정합성, UI/UX 문제, 버그, 기능 개선, needs-design 판단, 신규 피처 디자인 핸드오프, 제품 영역·환경·버전 포함 이슈 제목, saylog-design/saylog-console-design/saylog-live-design/carevoice/saylog 소스 이전 기준 확인, 디자인 캡처·녹화 첨부, 사용자 업로드 화면 정리. `dou-product-design` 워크플로가 이슈 단계에 닿으면(⑨ 커밋 전후·상태 변경) 이 스킬을 반드시 경유합니다.
+description: Use when 새록(saylog) GitHub 이슈를 만들거나 고치거나 상태를 바꿀 때. **이슈 본문 작성·수정, 이슈 상태 변경(UI/UX Progress·UI/UX Done), 프로젝트 필드 설정, 디자인 작업 완료 정리, 하위 이슈 생성·Parent 연결도 전부 포함합니다** — 새 이슈를 만들 때만이 아닙니다. `gh issue create/edit/comment`, `gh project item-edit` 를 새록 저장소에 쓰려고 하면 먼저 이 스킬을 부릅니다. 그 밖의 트리거: 디자인 하네스·프로토타입·스크린샷과 실제 제품 구현 비교, 디자인 정합성, UI/UX 문제, 버그, 기능 개선, needs-design 판단, 신규 피처 디자인 핸드오프, 제품 영역·환경·버전 포함 이슈 제목, saylog-design/carevoice/saylog 소스 이전 기준 확인, 디자인 캡처·녹화 첨부, 사용자 업로드 화면 정리. `dou-product-design` 워크플로가 이슈 단계에 닿으면(⑨ 커밋 전후·상태 변경) 이 스킬을 반드시 경유합니다.
 ---
 
 # GitHub 제품 UI/UX 이슈
@@ -43,11 +43,13 @@ description: Use when 새록(saylog) GitHub 이슈를 만들거나 고치거나 
 
 새록 이슈의 기본 GitHub 등록 대상은 `douinc/saylog`다. 단, 새록 실제 제품 소스는 `douinc/carevoice`에서 `douinc/saylog`로 이전 중이다. 마이그레이션 완료가 명시되지 않았다면 실제 배포 UI 구현은 `douinc/carevoice`를 우선 확인하고, `douinc/saylog`는 이슈 등록 대상이자 이전 대상 레포로 함께 확인한다.
 
-| 제품 영역 | 디자인 기준 레포 | 현재 실제 구현 확인 순서 | `douinc/saylog` 이전 후보 | 기본 라벨 |
+| 제품 영역 | 디자인 기준 레포 · 경로 | 현재 실제 구현 확인 순서 | `douinc/saylog` 이전 후보 | 기본 라벨 |
 | --- | --- | --- | --- | --- |
-| 앱 | `saylog-design` | `douinc/carevoice`에서 앱 구현 우선 확인 | `flutter/` | `📱 app` |
-| 웹 | `saylog-console-design` | `douinc/carevoice`에서 웹 구현 우선 확인 | `web/` | `🌐 web` |
-| 라이브 | `saylog-live-design` | `douinc/carevoice`에서 라이브 구현 우선 확인 | `saylog-live/`, `ws-gateway/` | `🎙 saylog-live` |
+| 앱 | `saylog-design` › `/mobile` | `douinc/carevoice`에서 앱 구현 우선 확인 | `flutter/` | `📱 app` |
+| 웹 | `saylog-design` › `/web` | `douinc/carevoice`에서 웹 구현 우선 확인 | `web/` | `🌐 web` |
+| 라이브 | `saylog-design` › `/desktop` | `douinc/carevoice`에서 라이브 구현 우선 확인 | `saylog-live/`, `ws-gateway/` | `🎙 saylog-live` |
+
+> 2026-08-07에 세 프로토타입(`saylog-design` · `saylog-console-design` · `saylog-live-design`)이 `douinc/saylog-design` 하나로 통합됐고 뒤의 두 저장소는 삭제됐다. 이제 **디자인 기준 저장소는 제품 영역과 무관하게 `douinc/saylog-design` 하나**이며, 제품은 저장소가 아니라 경로(`/mobile` · `/web` · `/desktop`)로 갈린다.
 
 디자인 기준 레포, 현재 실제 구현 레포, 이슈 등록/이전 대상 레포를 분리한다. 디자인 기준 레포는 승인된 화면, 프로토타입, 캡처 기준을 찾는 곳이다. 현재 실제 구현 레포는 사용자가 지금 배포 화면으로 보는 코드의 출처다. `douinc/saylog`는 기본 이슈 등록 대상이며, 마이그레이션된 코드가 있으면 이전 대상 구현 후보로 확인한다.
 
@@ -258,7 +260,7 @@ OS 화면 녹화나 GUI 앱 조작은 환경 권한과 사용자 승인이 있�
 ```
 
 - `기존 화면 대비 변경`은 파일별 구현 내용이 아니라 사용자가 보는 이전 동작과 변경 후 동작을 적는다.
-- **여기서 "기존 화면"은 실제 배포된 화면이다.** 개발 임시안(`app/drafts/`, 확정 전 시안, 미배포
+- **여기서 "기존 화면"은 실제 배포된 화면이다.** 개발 임시안(`app/{mobile,desktop}/drafts/`, 확정 전 시안, 미배포
   프로토타입)과의 차이는 쓰지 않는다. 임시안은 말 그대로 임시라 사용자에게 나간 적이 없고,
   개발자가 맞춰야 하는 기준도 아니다. `~을 없앴습니다`, `~이 사라졌습니다`처럼 **임시안에만
   있던 것을 걷어냈다는 문장은 이슈에 넣지 않는다** — 배포된 적 없는 것은 없어질 수도 없다.
@@ -267,7 +269,7 @@ OS 화면 녹화나 GUI 앱 조작은 환경 권한과 사용자 승인이 있�
 - 임시안을 왜 어떻게 정리했는지는 디자인 저장소의 설계 문서가 들고 있다. 개발과 그 이야기를
   해야 하면 이슈 본문이 아니라 PR이나 별도 대화에서 한다.
 - `프로토타입 확인 경로`에는 `localhost`만 적지 않는다. 개발자가 기준과 실행 대상을 찾을 수 있도록 제품 영역에 맞는 디자인 저장소를 GitHub 링크로 태그하고, 가능하면 기준 커밋도 링크한다.
-- 앱은 `douinc/saylog-design`, 웹은 `douinc/saylog-console-design`, 라이브는 `douinc/saylog-live-design`을 기본 디자인 기준 저장소로 사용한다.
+- 세 제품 모두 `douinc/saylog-design`을 기본 디자인 기준 저장소로 사용하고, 제품 경로(`/mobile` · `/web` · `/desktop`)를 함께 적는다.
 - `douinc/saylog-live`(그리고 `carevoice/saylog-live`)는 **실제 Electron 앱 소스**다. 디자인 기준 저장소로 링크하지 않는다.
 - 저장소 링크 다음에 좌측 패널의 흐름·그룹·화면, 프레임 밖 상태 칩, 화면 안에서 눌러야 하는 진입점을 순서대로 적는다.
 

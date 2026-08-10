@@ -57,7 +57,7 @@ GitHub 이슈 링크가 없으면 새 이슈를 임의로 만들지 않고 기�
 | 아이콘 | `@tabler/icons-react` (`Icon*` 형식) |
 | shadcn 컴포넌트 | `components/ui/` (수정 금지) |
 | 제품 전용 컴포넌트 | `components/[제품명]/` |
-| 로컬 실행 | `bun run dev` → `http://localhost:3000` |
+| 로컬 실행 | `bun run dev` → 포트는 CLAUDE.md `product_design_workflow.local` (제품마다 다르다 — 예: 새록 `saylog-design`은 3100) |
 | UX 라이팅 스킬 | CLAUDE.md `product_design_workflow.ux_writing_skill` |
 | 디자인 시스템 | **dou-design-system 단일 기준** (위치: CLAUDE.md `product_design_workflow.design_system`) |
 
@@ -380,7 +380,9 @@ bun run typecheck
 
 ## ⑧ 로컬 미리보기
 
-`localhost:3000/[페이지경로]` 에서 담당자가 직접 확인.
+`localhost:<포트>/[페이지경로]` 에서 담당자가 직접 확인. 포트는 CLAUDE.md `product_design_workflow.local`을 따른다 — 3000으로 단정하지 않는다.
+
+한 저장소가 제품 여러 개를 담기도 한다. 그때는 제품 경로까지 적는다 (예: 새록 `saylog-design`은 `/mobile` · `/desktop` · `/web`).
 
 ---
 
