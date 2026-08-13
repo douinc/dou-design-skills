@@ -40,6 +40,7 @@ npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-produ
 | --- | --- |
 | [dou-product-design](./skills/dou-product-design/) | Next.js + shadcn/ui 기반 Dou 제품 화면의 스펙·와이어프레임·직접 구현 워크플로우 |
 | [saylog-uxui-issues](./skills/saylog-uxui-issues/) | Saylog 제품 UI/UX 이슈의 초안·등록, 하위 이슈 관계와 GitHub Project 상태 관리 |
+| [saylog-ux-writing-korean](./skills/saylog-ux-writing-korean/) | Saylog UI 문구의 톤 규칙과 기존 문구 대조 절차 (앱·웹 콘솔·새록 라이브 공통) |
 | [saylog-manual-authoring](./skills/saylog-manual-authoring/) | Saylog 화면 스크린샷과 설명으로 A4 사용자 매뉴얼을 만들거나 수정하는 워크플로우 |
 
 ## Skill 간 의존성
@@ -49,6 +50,7 @@ npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-produ
 - Dou 제품 저장소의 docs/design-harness.md와 docs/ia.md
 - 프로젝트 설정의 product_design_workflow.design_system에 지정된 dou-design-system
 - GitHub 이슈를 연결하는 작업에서는 saylog-uxui-issues 규칙과 GitHub 권한
+- UI 문구를 쓰거나 고칠 때는 프로젝트 설정의 product_design_workflow.ux_writing_skill에 지정된 스킬 (Saylog는 saylog-ux-writing-korean)
 
 ### saylog-uxui-issues
 
@@ -61,6 +63,10 @@ npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-produ
 - douinc/saylog-live
 
 GitHub 이슈 생성·수정, 하위 이슈 연결, Project 상태 변경에는 해당 저장소와 Project에 필요한 권한이 있어야 합니다.
+
+### saylog-ux-writing-korean
+
+기존 문구 대조에는 제품 리포의 docs/design-harness.md가 가리키는 실제 구현 소스와 baseline 캡처가 필요합니다. Saylog는 douinc/carevoice의 flutter · web · saylog-live입니다.
 
 ### saylog-manual-authoring
 
@@ -85,6 +91,7 @@ dou-design-skills/
 ├── skills/
 │   ├── dou-product-design/
 │   ├── saylog-uxui-issues/
+│   ├── saylog-ux-writing-korean/
 │   └── saylog-manual-authoring/
 └── docs/
     └── superpowers/
