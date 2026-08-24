@@ -120,7 +120,7 @@ docs/screens/[페이지명]/wireframe.html
 [모바일 프레임]    [데스크탑 프레임]   ← 둘 다 있는 제품일 때만
 ```
 
-제품 surface는 CLAUDE.md `product_design_workflow`·기존 화면으로 판단한다(예: 화면이 `MobileScreen`만 쓰면 모바일 전용). 불명확하면 담당자에게 확인한다.
+제품 surface는 CLAUDE.md `design_config`·기존 화면으로 판단한다(예: 화면이 `MobileScreen`만 쓰면 모바일 전용). 불명확하면 담당자에게 확인한다.
 
 ### 어떻게 나열하나 — 메인 플로우 가로, 예외 세로
 
