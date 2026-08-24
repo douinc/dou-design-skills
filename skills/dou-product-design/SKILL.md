@@ -1,5 +1,5 @@
 ---
-name: dou-screen-design
+name: dou-product-design
 description: Use when designing, wireframing, or directly implementing a screen for any Dou product Next.js prototype (Next.js + @dou/ui / shadcn stack), including when work starts from a GitHub parent issue. Covers the full spec → wireframe → implementation workflow with the policy-harness gate.
 metadata:
   author: minsu
@@ -263,7 +263,7 @@ GitHub 작업 이슈 연결 (부모 이슈 링크가 있을 때)
 **저장 위치:** `docs/screens/[페이지명]/wireframe.html` — 문서(README.md)와 **같은 폴더**에 둔다(화면별 한 폴더).
 → 확인: 그 HTML을 브라우저로 **바로 연다**(dev 서버 불필요; Tailwind CDN 쓰므로 인터넷만 있으면 됨).
 
-**REQUIRED:** 작성 전 Read 도구로 `~/.claude/skills/dou-screen-design/wireframe-guide.md`를 읽는다. 제품에 별도 wireframe-guide가 있으면 그것도 함께 읽는다.
+**REQUIRED:** 작성 전 Read 도구로 `~/.claude/skills/dou-product-design/wireframe-guide.md`를 읽는다. 제품에 별도 wireframe-guide가 있으면 그것도 함께 읽는다.
 
 **CSS 규칙:** 와이어프레임 HTML은 **Tailwind CSS CDN + 유틸리티 클래스**로 작성한다. `<style>` 블록에 raw CSS를 작성하지 않는다. `@keyframes`와 `body { font-family }` 한 줄만 예외 허용.
 
