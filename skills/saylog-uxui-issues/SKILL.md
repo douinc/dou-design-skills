@@ -1,6 +1,6 @@
 ---
 name: saylog-uxui-issues
-description: Use when 새록(saylog) GitHub 이슈를 만들거나 고치거나 상태를 바꿀 때. **이슈 본문 작성·수정, 이슈 상태 변경(UI/UX Progress·UI/UX Done), 프로젝트 필드 설정, 디자인 작업 완료 정리, 하위 이슈 생성·Parent 연결도 전부 포함합니다** — 새 이슈를 만들 때만이 아닙니다. `gh issue create/edit/comment`, `gh project item-edit` 를 새록 저장소에 쓰려고 하면 먼저 이 스킬을 부릅니다. 그 밖의 트리거: 디자인 하네스·프로토타입·스크린샷과 실제 제품 구현 비교, 디자인 정합성, UI/UX 문제, 버그, 기능 개선, needs-design 판단, 신규 피처 디자인 핸드오프, 제품 영역·환경·버전 포함 이슈 제목, saylog-design/carevoice/saylog 소스 이전 기준 확인, 디자인 캡처·녹화 첨부, 사용자 업로드 화면 정리. `dou-product-design` 워크플로가 이슈 단계에 닿으면(⑨ 커밋 전후·상태 변경) 이 스킬을 반드시 경유합니다.
+description: Use when 새록(saylog) GitHub 이슈를 만들거나 고치거나 상태를 바꿀 때. 이슈 본문·제목·라벨 수정, 상태 변경(UI/UX Progress·UI/UX Done), 프로젝트 필드 설정, 하위 이슈·Parent 연결 포함. 새록 저장소에 `gh issue` 또는 `gh project` 명령을 쓰기 전에 먼저 부른다. 디자인 정합성·UI/UX 버그·기능 개선·needs-design 판단·디자인 핸드오프도 이 스킬을 경유한다.
 ---
 
 # GitHub 제품 UI/UX 이슈

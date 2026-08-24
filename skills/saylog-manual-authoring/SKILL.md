@@ -1,14 +1,6 @@
 ---
 name: saylog-manual-authoring
-description: >-
-  사용자가 첨부한 화면 스크린샷과 각 화면에 대한 말 설명만으로 깔끔한 A4 사용자
-  매뉴얼 PDF를 만들거나 수정한다 — Figma 불필요. 사용자 매뉴얼 / 메뉴얼 / user
-  manual / user guide를 새로 만들거나, 페이지를 추가·수정하거나, 특정 단계의
-  스크린샷을 교체하거나, 모바일 앱과 웹 콘솔 매뉴얼을 하나의 배포용 PDF로 합치거나,
-  general 버전에서 특정 고객(병원)용 에디션을 만들 때 반드시 사용한다. "이 화면
-  매뉴얼에 추가해줘"처럼 짧게 말하거나 UI 스크린샷을 붙이고 흐름을 설명하기만 해도
-  발동한다. 자체 완결형 HTML을 헤드리스 Chrome으로 A4 PDF로 렌더하고 페이지마다
-  육안 검증한다. macOS(Chrome + Quartz) 기준.
+description: 화면 스크린샷과 말 설명만으로 A4 사용자 매뉴얼 PDF를 만들거나 고칠 때 — Figma 불필요. 사용자 매뉴얼/메뉴얼/user manual/user guide 신규 작성, 페이지 추가·수정, 스크린샷 교체, 모바일 앱과 웹 콘솔 매뉴얼 합치기, 병원별 에디션 만들기에 쓴다. "이 화면 매뉴얼에 추가해줘" 같은 짧은 말이나 UI 스크린샷 첨부만으로도 발동한다. macOS(Chrome + Quartz) 기준.
 metadata:
   author: minsu-ux
   email: team@dou.so
