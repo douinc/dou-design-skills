@@ -1,5 +1,5 @@
 ---
-name: dou-product-design
+name: dou-screen-design
 description: Use when designing, wireframing, or directly implementing a screen for any Dou product Next.js prototype (Next.js + @dou/ui / shadcn stack), including when work starts from a GitHub parent issue. Covers the full spec → wireframe → implementation workflow with the policy-harness gate.
 metadata:
   author: minsu
@@ -49,7 +49,7 @@ GitHub 이슈 링크가 없으면 새 이슈를 임의로 만들지 않고 기�
 
 ## 프로젝트 구조
 
-작업 시작 전 CLAUDE.md의 `product_design_workflow` 키를 확인한다. 없으면 담당자에게 프로젝트 경로와 설정을 물어본다.
+작업 시작 전 CLAUDE.md의 `design_config` 키를 확인한다. 없으면 담당자에게 프로젝트 경로와 설정을 물어본다.
 
 | 항목 | 값 |
 |------|-----|
@@ -57,9 +57,9 @@ GitHub 이슈 링크가 없으면 새 이슈를 임의로 만들지 않고 기�
 | 아이콘 | `@tabler/icons-react` (`Icon*` 형식) |
 | shadcn 컴포넌트 | `components/ui/` (수정 금지) |
 | 제품 전용 컴포넌트 | `components/[제품명]/` |
-| 로컬 실행 | `bun run dev` → 포트는 CLAUDE.md `product_design_workflow.local` (제품마다 다르다 — 예: 새록 `saylog-design`은 3100) |
-| UX 라이팅 스킬 | CLAUDE.md `product_design_workflow.ux_writing_skill` |
-| 디자인 시스템 | **dou-design-system 단일 기준** (위치: CLAUDE.md `product_design_workflow.design_system`) |
+| 로컬 실행 | `bun run dev` → 포트는 CLAUDE.md `design_config.local` (제품마다 다르다 — 예: 새록 `saylog-design`은 3100) |
+| UX 라이팅 스킬 | CLAUDE.md `design_config.ux_writing_skill` |
+| 디자인 시스템 | **dou-design-system 단일 기준** (위치: CLAUDE.md `design_config.design_system`) |
 
 ## 디자인 시스템 단일 기준 (필수)
 
@@ -71,7 +71,7 @@ GitHub 이슈 링크가 없으면 새 이슈를 임의로 만들지 않고 기�
 - `public/ai/tokens.json` — 토큰 값(색·Pretendard·간격·radius)
 - 사용법이 더 필요하면 `src/examples/<컴포넌트>.tsx`(공식 예제)를 참조
 
-**위치**: CLAUDE.md `product_design_workflow.design_system`에 지정(레포 로컬 경로 또는 배포 URL, 추후 `@dou/ui` 패키지). 없으면 담당자에게 묻는다.
+**위치**: CLAUDE.md `design_config.design_system`에 지정(레포 로컬 경로 또는 배포 URL, 추후 `@dou/ui` 패키지). 없으면 담당자에게 묻는다.
 
 **규칙**:
 - 색·radius·간격은 dou-design-system 토큰만 사용. 제품별 임의 토큰·색 금지.
@@ -218,7 +218,7 @@ GitHub 작업 이슈 연결 (부모 이슈 링크가 있을 때)
 
 **먼저 읽기:** dou-design-system `DESIGN.md`(디자인 철학·Do/Don't) — 어떤 결이어야 하는지 감을 잡는다. (컴포넌트 색인·토큰 `public/ai/*`은 시각을 정하는 ⑥/개발팀 단계에서 읽는다.)
 
-**REQUIRED SUB-SKILL:** UI 문구(버튼 라벨, 빈 상태 텍스트, 에러 메시지 등)가 포함될 때는 반드시 CLAUDE.md `product_design_workflow.ux_writing_skill`에 지정된 스킬을 Skill 도구로 invoke하여 작성한다. 그 키가 비어 있으면 임의로 비슷한 이름의 스킬을 고르지 말고 담당자에게 어느 스킬을 쓸지 묻는다 — 제품마다 톤이 다르고, 이름이 비슷한 범용 스킬이 정반대 규칙을 들고 있는 경우가 있다.
+**REQUIRED SUB-SKILL:** UI 문구(버튼 라벨, 빈 상태 텍스트, 에러 메시지 등)가 포함될 때는 반드시 CLAUDE.md `design_config.ux_writing_skill`에 지정된 스킬을 Skill 도구로 invoke하여 작성한다. 그 키가 비어 있으면 임의로 비슷한 이름의 스킬을 고르지 말고 담당자에게 어느 스킬을 쓸지 묻는다 — 제품마다 톤이 다르고, 이름이 비슷한 범용 스킬이 정반대 규칙을 들고 있는 경우가 있다.
 
 ### 기존 문구 대조 — 이미 있는 화면을 고칠 때 (필수)
 
@@ -263,7 +263,7 @@ GitHub 작업 이슈 연결 (부모 이슈 링크가 있을 때)
 **저장 위치:** `docs/screens/[페이지명]/wireframe.html` — 문서(README.md)와 **같은 폴더**에 둔다(화면별 한 폴더).
 → 확인: 그 HTML을 브라우저로 **바로 연다**(dev 서버 불필요; Tailwind CDN 쓰므로 인터넷만 있으면 됨).
 
-**REQUIRED:** 작성 전 Read 도구로 `~/.claude/skills/dou-product-design/wireframe-guide.md`를 읽는다. 제품에 별도 wireframe-guide가 있으면 그것도 함께 읽는다.
+**REQUIRED:** 작성 전 Read 도구로 `~/.claude/skills/dou-screen-design/wireframe-guide.md`를 읽는다. 제품에 별도 wireframe-guide가 있으면 그것도 함께 읽는다.
 
 **CSS 규칙:** 와이어프레임 HTML은 **Tailwind CSS CDN + 유틸리티 클래스**로 작성한다. `<style>` 블록에 raw CSS를 작성하지 않는다. `@keyframes`와 `body { font-family }` 한 줄만 예외 허용.
 
@@ -501,7 +501,7 @@ bun run typecheck
 
 ## ⑧ 로컬 미리보기 → 브라우저 UX 검증
 
-`localhost:<포트>/[페이지경로]` 에서 담당자가 직접 확인. 포트는 CLAUDE.md `product_design_workflow.local`을 따른다 — 3000으로 단정하지 않는다.
+`localhost:<포트>/[페이지경로]` 에서 담당자가 직접 확인. 포트는 CLAUDE.md `design_config.local`을 따른다 — 3000으로 단정하지 않는다.
 
 한 저장소가 제품 여러 개를 담기도 한다. 그때는 제품 경로까지 적는다 (예: 새록 `saylog-design`은 `/mobile` · `/desktop` · `/web`).
 

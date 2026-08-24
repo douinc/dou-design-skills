@@ -17,7 +17,7 @@ npx skills add douinc/dou-design-skills@<skill-name>
 예시:
 
 ~~~bash
-npx skills add douinc/dou-design-skills@dou-product-design
+npx skills add douinc/dou-design-skills@dou-screen-design
 ~~~
 
 ### Git URL 설치
@@ -28,24 +28,24 @@ npx skills add douinc/dou-design-skills@dou-product-design
 npx skills add https://github.com/douinc/dou-design-skills.git --skill <skill-name>
 ~~~
 
-dou-product-design에서 GitHub 이슈 연결 작업까지 하려면 두 skill을 함께 설치합니다.
+dou-screen-design에서 GitHub 이슈 연결 작업까지 하려면 두 skill을 함께 설치합니다.
 
 ~~~bash
-npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-product-design --skill saylog-uxui-issues
+npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-screen-design --skill saylog-uxui-issues
 ~~~
 
 ## Skill 목록
 
 | Skill | 용도 |
 | --- | --- |
-| [dou-product-design](./skills/dou-product-design/) | Next.js + shadcn/ui 기반 Dou 제품 화면의 스펙·와이어프레임·직접 구현 워크플로우 |
+| [dou-screen-design](./skills/dou-screen-design/) | Next.js + shadcn/ui 기반 Dou 제품 화면의 스펙·와이어프레임·직접 구현 워크플로우 |
 | [saylog-uxui-issues](./skills/saylog-uxui-issues/) | Saylog 제품 UI/UX 이슈의 초안·등록, 하위 이슈 관계와 GitHub Project 상태 관리 |
 | [saylog-ux-writing-korean](./skills/saylog-ux-writing-korean/) | Saylog UI 문구의 톤 규칙과 기존 문구 대조 절차 (앱·웹 콘솔·새록 라이브 공통) |
 | [saylog-manual-authoring](./skills/saylog-manual-authoring/) | Saylog 화면 스크린샷과 설명으로 A4 사용자 매뉴얼을 만들거나 수정하는 워크플로우 |
 
 ## Skill 간 의존성
 
-### dou-product-design
+### dou-screen-design
 
 - Dou 제품 저장소의 docs/design-harness.md와 docs/ia.md
 - 프로젝트 설정의 product_design_workflow.design_system에 지정된 dou-design-system
@@ -89,7 +89,7 @@ skill을 설치한 뒤 제품 저장소의 지침에 따라 필요한 private �
 dou-design-skills/
 ├── README.md
 ├── skills/
-│   ├── dou-product-design/
+│   ├── dou-screen-design/
 │   ├── saylog-uxui-issues/
 │   ├── saylog-ux-writing-korean/
 │   └── saylog-manual-authoring/
