@@ -18,7 +18,7 @@ description: >-
 
 # Product Design Workflow
 
-기획자·UX 디자이너의 **기획 구체화 → 기획서 작성 → 화면 목록·IA 확정 → 화면별 상세 기획 → 검토 및 최종 확정**까지를 오케스트레이션. 범용(personal) 스킬. 프로덕트별 설정은 `product-config` 블록에서 주입받는다.
+기획자·UX 디자이너의 **기획 구체화 → 기획서 작성 → 화면 목록·IA 확정 → 화면별 상세 기획 → 검토 및 최종 확정**까지를 오케스트레이션. 범용(personal) 스킬. 프로덕트별 설정은 `design_config` 블록에서 주입받는다.
 
 **이 스킬을 쓰지 않는 경우:**
 - 화면 구성이 이미 확정되어 있고 브리프 파일만 정리하면 되는 경우 → 직접 `templates/brief.md` 기반으로 작성
@@ -31,7 +31,7 @@ description: >-
 
 ---
 
-## 0. product-config (필수 선행)
+## 0. design_config (필수 선행)
 
 cwd 상위의 `CLAUDE.md`에서 아래 블록을 찾는다. 미발견 시 대화로 수집 후 `<project-root>/CLAUDE.md`에 append.
 
@@ -493,7 +493,7 @@ digraph phase4_flow {
 | `templates/brief.md` | Phase 3 브리프 템플릿 |
 | `templates/feature-readme.md` | 기획 폴더 README 템플릿 |
 | `templates/planning-index.md` | 최상위 README 템플릿 |
-| `product-config.example.md` | CLAUDE.md 설정 예시 |
+| `product-config.example.md` | `design_config` 블록 작성 예시 |
 | (IA) | 템플릿 없음 — Section 5.1의 mermaid 형식을 따른다 |
 
 ---
