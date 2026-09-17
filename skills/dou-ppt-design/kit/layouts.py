@@ -231,3 +231,32 @@ def app_callouts(s, image, label, points, top=CONTENT_TOP + 6, bottom=648, side=
             edge = px + pw if side == "left" else px
             s.add(Line(edge - 10, my, edge + (24 if side == "left" else -24), my, color=PRIMARY, w=1.5),
                   numbered(edge - 22 if side == "left" else edge - 2, my - 12, i + 1, size=24, bg=PRIMARY, fs=11))
+
+
+# ---------------------------------------------------------------- 회사·서비스 로고
+# assets/logos/<파일>.svg 를 빌드 때 PNG(원래 색 / 흰색) 로 자동 변환해 쓴다.
+# 새 로고는 SVG 를 그 폴더에 넣고 아래 별칭에 한 줄 추가하면 된다.
+LOGO_ALIAS = {"도우": "ci", "dou": "ci", "새록": "saylog", "미리봄": "miribom", "약먹자": "yakmeokja", "수발": "subal"}
+
+
+def _logo_ratio(key):
+    import os, re
+    svg = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "logos", f"{key}.svg"), encoding="utf-8").read()
+    m = re.search(r'viewBox="[\d.\-]+ [\d.\-]+ ([\d.]+) ([\d.]+)"', svg)
+    return float(m.group(1)) / float(m.group(2))
+
+
+def logo(name, x, y, h, white=False, align="left"):
+    """로고 그림 하나. name 은 별칭(새록·미리봄 등) 또는 파일명. 높이 h 기준으로 폭은 원본 비율대로.
+    white=True 면 짙은 바탕용 흰색 로고. align="center"/"right" 면 x 가 가운데/오른쪽 끝."""
+    key = LOGO_ALIAS.get(name, name)
+    w = h * _logo_ratio(key)
+    if align == "center":
+        x -= w / 2
+    elif align == "right":
+        x -= w
+    return Image(f"logos/{key}{'-white' if white else ''}.png", x, y, w, h, name=f"logo:{name}")
+
+
+def logo_width(name, h):
+    return h * _logo_ratio(LOGO_ALIAS.get(name, name))

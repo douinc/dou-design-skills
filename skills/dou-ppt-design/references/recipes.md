@@ -14,6 +14,7 @@
 8. 글 넘침 막는 법
 9. 내용이 많은 장 견본
 10. 앱·웹 화면 (흐름 / 화면 설명 / 앱+웹)
+11. 로고와 여러 기관 색 구분
 
 ---
 
@@ -41,9 +42,9 @@ def s_something():
 ```python
 gx, gy, gw, gh = MX, CONTENT_TOP, 470, 316
 s.add(card(gx, gy, gw, gh, fill=NAVY, radius=16),
-      Icon("quote", gx + 28, gy + 26, 26, "#6FA2FF"),
+      Icon("quote", gx + 28, gy + 26, 26, "#60A5FA"),
       Text(gx + 28, gy + 66, gw - 56, 150, paras(
-          ("핵심 문장 앞부분 ", ("강조할 말", {"color": "#9BC4FF"}), " 뒷부분"),
+          ("핵심 문장 앞부분 ", ("강조할 말", {"color": "#93C5FD"}), " 뒷부분"),
       ), size=21, color=WHITE, weight=700, line=1.5),
       Text(gx + 28, gy + 236, gw - 56, 48, "보충 한 문장", size=12.5, color="#B7C6E6", line=1.5))
 px = MX + 500; pw = W - MX - px
@@ -166,13 +167,14 @@ org_chart(s, ("홍길동", "대표이사", "영업 · 연구 · 개발 총괄"),
 
 ## 9. 내용이 많은 장 견본
 10. 앱·웹 화면 (흐름 / 화면 설명 / 앱+웹)
+11. 로고와 여러 기관 색 구분
 
 제안·기술평가처럼 한 장에 표·숫자·화면을 같이 보여줘야 할 때는 **references/examples/dense_slide.py** 를 봅니다.
 왼쪽 표(4행)와 측정지표 문단, 오른쪽 짙은 숫자 패널과 제품 화면 모형이 한 장에 들어갑니다. 화면 모형은 illustrations.md 견본 D 를 `app-mock` 이름으로 등록해 씁니다.
 
 - 좌우를 560 : 나머지로 나누고, 사이 간격은 28px.
 - 같은 장 안에서 글자 크기는 3단계만: 제목급 28(숫자), 본문 11~12, 보조 9~10.5.
-- 짙은 패널 안 보조 글은 #B7C6E6 / #8FA3CC, 강조 라벨은 #9BC4FF.
+- 짙은 패널 안 보조 글은 #B7C6E6 / #8FA3CC, 강조 라벨은 #93C5FD.
 - 복잡해도 부제는 한 문장. 출처는 header 의 `ref` 로 오른쪽 위에 작게.
 - "예시 데이터입니다", "보장값 아님" 같은 단서는 해당 요소 바로 아래 LIGHT 색 한 줄로 붙입니다.
 
@@ -206,3 +208,31 @@ s.add(Icon("arrow-right", MX + 330, CONTENT_TOP + 20 + ph / 2 - 14, 28, PRIMARY)
 s.add(browser_slot(MX + 400, CONTENT_TOP + 20, W - 2 * MX - 400, ph, "웹 콘솔 · 기록 목록"))
 ```
 `phone_slot` 은 (도형 목록, 높이) 를 돌려주고, `browser_slot` 은 도형 목록만 돌려줍니다. 휴대폰 폭 210 이면 높이 455 — 본문 영역에 맞추려면 폭 230 이하.
+
+## 11. 로고와 여러 기관 색 구분
+
+**서비스 로고 줄 세우기**
+```python
+names = ["새록", "미리봄", "약먹자"]
+gap = 20; cw = (W - 2*MX - (len(names)-1)*gap) / len(names)
+for i, n in enumerate(names):
+    x = MX + i * (cw + gap)
+    s.add(card(x, CONTENT_TOP, cw, 260, fill=CARD, radius=16),
+          logo(n, x + cw / 2, CONTENT_TOP + 50, 80, align="center"),
+          Text(x, CONTENT_TOP + 160, cw, 30, n, size=20, color=NAVY, weight=700, align="center"))
+```
+짙은 바탕 위에는 `logo("도우", x, y, 36, white=True)`.
+
+**도우 + 협력 기관 역할 나누기** (기관 색은 brand_color.py 로 뽑은 값)
+```python
+HOSP, HOSP_TEXT, HOSP_T = brand("#9CA800")          # 예: 로고에서 뽑은 색
+orgs = [("도우", DOU, PRIMARY_DK, DOU_T, "logos/ci.png"), ("OO병원", HOSP, HOSP_TEXT, HOSP_T, "hospital-logo.png")]
+cw = (W - 2*MX - 24) / 2
+for i, (name, fill, text, tint, img) in enumerate(orgs):
+    x = MX + i * (cw + 24)
+    s.add(Rect(x, CONTENT_TOP, cw, 300, fill=tint, radius=16),
+          Rect(x, CONTENT_TOP, 6, 300, fill=fill, radius=3),
+          Text(x + 28, CONTENT_TOP + 22, cw - 56, 30, name, size=20, color=text, weight=700))
+    # 로고: 도우 서비스는 logo(...), 외부 기관은 Image(파일, x, y, w, h) — w:h 는 원본 비율 그대로
+```
+표 안에서 담당 기관을 표시할 때는 칸에 `runs(("도우", {"color": PRIMARY_DK, "bold": True}))`, `runs(("OO병원", {"color": HOSP_TEXT, "bold": True}))` 처럼 **글자색(둘째 값)** 을 씁니다.

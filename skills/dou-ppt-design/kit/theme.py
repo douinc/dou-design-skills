@@ -1,17 +1,17 @@
 """공통 디자인 토큰과 레이아웃 조각."""
 from engine import Rect, Text, Line, Icon, Image, Run, runs, fs, W, H
 
-# ---- 색
-PRIMARY = "#4083F7"
-PRIMARY_DK = "#2F66D6"
+# ---- 색 — 도우 기준색은 dou-design-system 의 blue-500 (#3B82F6)
+PRIMARY = "#3B82F6"     # blue-500 · 도우 내용·강조
+PRIMARY_DK = "#2563EB"  # blue-600
 NAVY = "#0F1B3D"
 INK = "#1A2233"
 MUTED = "#5B6472"
 LIGHT = "#8A94A6"
 BORDER = "#E3E8F0"
 CARD = "#F5F7FA"
-TINT = "#EDF3FE"
-TINT2 = "#D9E6FD"
+TINT = "#EFF6FF"        # blue-50
+TINT2 = "#DBEAFE"       # blue-100
 ORANGE = "#F97316"
 ORANGE_T = "#FFF3E8"
 GREEN = "#16A34A"
@@ -19,11 +19,28 @@ GREEN_T = "#EAF7EE"
 RED = "#DC2626"
 RED_T = "#FDECEC"
 WHITE = "#FFFFFF"
-# ---- 브랜드 색 (회사 구분에만 쓴다)
-DOU = "#1E77E0"        # 도우 공식 블루 (logo-dou.svg)
-DOU_T = "#E9F1FC"      # 도우 옅은 배경
+# ---- 브랜드 색 (회사·기관 구분에만 쓴다)
+DOU = PRIMARY          # 도우 = blue-500
+DOU_T = TINT
 
-ICON_COLORS = [PRIMARY, NAVY, MUTED, ORANGE, GREEN, RED, WHITE, LIGHT, "#6FA2FF", "#FF9B6B", "#9BC4FF", TINT2, "#C4CEDD", DOU]
+
+def brand(hex_color):
+    """다른 회사·병원의 CI 색 하나로 (채움색, 글자색, 옅은 배경) 세 벌을 만든다.
+    글자색은 흰 바탕 대비 4.5:1 이상이 될 때까지 어둡게 한다. 색은 brand_color.py 로 로고에서 뽑는다."""
+    def rgb(h): h = h.lstrip("#"); return [int(h[i:i + 2], 16) for i in (0, 2, 4)]
+    def hexs(c): return "#" + "".join(f"{max(0, min(255, round(v))):02X}" for v in c)
+    def lum(c):
+        s = [v / 255 for v in c]
+        s = [v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4 for v in s]
+        return 0.2126 * s[0] + 0.7152 * s[1] + 0.0722 * s[2]
+    base = rgb(hex_color)
+    text = base[:]
+    while (1.05) / (lum(text) + 0.05) < 4.5:
+        text = [v * 0.92 for v in text]
+    tint = [255 - (255 - v) * 0.1 for v in base]
+    return hexs(base), hexs(text), hexs(tint)
+
+ICON_COLORS = [PRIMARY, NAVY, MUTED, ORANGE, GREEN, RED, WHITE, LIGHT, "#60A5FA", "#FF9B6B", "#93C5FD", TINT2, "#C4CEDD", DOU]
 
 MX = 64  # 좌우 여백
 CONTENT_TOP = 158

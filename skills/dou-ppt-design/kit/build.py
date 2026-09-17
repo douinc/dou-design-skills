@@ -44,6 +44,23 @@ if todo:
     subprocess.run(["node", os.path.join(HERE, "render.mjs"), "images", job], check=True)
     json.dump(stamps, open(stamp_path, "w"))
 
+# 로고: assets/logos/*.svg 중 PNG 가 없거나 SVG 가 더 새것이면 원래 색·흰색 두 벌을 굽는다
+logo_dir = os.path.join(HERE, "assets", "logos")
+jobs = []
+for fn in sorted(os.listdir(logo_dir)) if os.path.isdir(logo_dir) else []:
+    if not fn.endswith(".svg"):
+        continue
+    src = os.path.join(logo_dir, fn)
+    for white in (False, True):
+        out = os.path.join(logo_dir, fn[:-4] + ("-white" if white else "") + ".png")
+        if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
+            jobs.append({"out": out, "svg": open(src, encoding="utf-8").read(), "white": white})
+if jobs:
+    job = os.path.join(HERE, "preview", "_logos.json")
+    os.makedirs(os.path.dirname(job), exist_ok=True)
+    json.dump(jobs, open(job, "w"), ensure_ascii=False)
+    subprocess.run(["node", os.path.join(HERE, "render.mjs"), "logos", job], check=True)
+
 os.makedirs(os.path.join(HERE, "preview"), exist_ok=True)
 out_pptx = os.path.abspath(os.path.join(HERE, "..", f"{deck.TITLE}.pptx"))
 build(deck.SLIDES, out_pptx, os.path.join(HERE, "preview", "index.html"), ICONS)

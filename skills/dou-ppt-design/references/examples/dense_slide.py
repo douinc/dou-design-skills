@@ -38,7 +38,7 @@ def dense_example():
               Text(x, CONTENT_TOP + 76, fw, 30, l, size=9.5, color="#B7C6E6", line=1.35))
     s.add(Text(rx + 22, CONTENT_TOP + 110, rw - 44, 28, "본 사업 목표값과 측정 방법은 착수 단계에서 확정합니다. 표본·정답 규칙은 측정 전에 고정합니다.", size=9, color="#8FA3CC", line=1.4),
           Rect(rx + 22, CONTENT_TOP + 142, rw - 44, 26, fill="#1B2A55", radius=8),
-          Text(rx + 32, CONTENT_TOP + 142, rw - 64, 26, runs(("인수 기준  ", {"bold": True, "color": "#9BC4FF"}), "미승인 반영 0건 · 근거 없는 값은 오류로 집계"),
+          Text(rx + 32, CONTENT_TOP + 142, rw - 64, 26, runs(("인수 기준  ", {"bold": True, "color": "#93C5FD"}), "미승인 반영 0건 · 근거 없는 값은 오류로 집계"),
                size=9.5, color=WHITE, valign="middle", line=1))
     my2 = CONTENT_TOP + 194
     s.add(Image("app-mock.png", rx, my2, rw, 268, name="app-mock"),

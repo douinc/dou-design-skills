@@ -1,5 +1,6 @@
 /**
  *   node render.mjs icons <job.json>   # build.py 가 부른다 — 아이콘 PNG 굽기
+ *   node render.mjs logos <job.json>   # build.py 가 부른다 — 로고 PNG 굽기
  *   node render.mjs images <job.json>  # build.py 가 부른다 — 삽화 PNG 굽기
  *   node render.mjs preview [3 7 ...]  # preview/png/slide-NN.png 로 장마다 찍기
  */
@@ -21,6 +22,19 @@ if (mode === "icons") {
     await page.locator("#i").screenshot({ path: j.out, omitBackground: true });
   }
   console.log(`icons: ${jobs.length} rendered`);
+} else if (mode === "logos") {
+  // 로고 SVG → 높이 400px 기준 PNG (흰색 버전은 색을 모두 흰색으로)
+  const jobs = JSON.parse(await readFile(rest[0], "utf8"));
+  const page = await browser.newPage({ deviceScaleFactor: 1 });
+  for (const j of jobs) {
+    const m = j.svg.match(/viewBox="[\d.\-]+ [\d.\-]+ ([\d.]+) ([\d.]+)"/);
+    const h = 400, w = Math.round(h * Number(m[1]) / Number(m[2]));
+    await page.setViewportSize({ width: w, height: h });
+    const svg = j.svg.replace(/<svg([^>]*?)\swidth="[^"]*"/, "<svg$1").replace(/<svg([^>]*?)\sheight="[^"]*"/, "<svg$1");
+    await page.setContent(`<html><body style="margin:0;background:transparent"><div id="i" style="width:${w}px;height:${h}px;${j.white ? "filter:brightness(0) invert(1)" : ""}">${svg.replace("<svg", '<svg width="100%" height="100%"')}</div></body></html>`);
+    await page.locator("#i").screenshot({ path: j.out, omitBackground: true });
+    console.log(`logo: ${path.basename(j.out)}`);
+  }
 } else if (mode === "images") {
   // 삽화: 2배 해상도로 굽는다 (슬라이드에서 선명하게)
   const jobs = JSON.parse(await readFile(rest[0], "utf8"));

@@ -121,7 +121,7 @@ class Icon:
     x: float
     y: float
     size: float = 24
-    color: str = "#4083F7"
+    color: str = "#3B82F6"
 
 
 @dataclass
