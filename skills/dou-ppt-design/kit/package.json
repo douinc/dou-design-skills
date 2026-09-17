@@ -1,0 +1,1 @@
+{ "name": "dou-ppt-design-kit", "private": true, "type": "module", "dependencies": { "playwright": "^1.49.0" } }
