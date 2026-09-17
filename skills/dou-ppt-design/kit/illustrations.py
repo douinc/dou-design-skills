@@ -34,6 +34,7 @@ EXAMPLE = scene(f"""
 """)
 
 # 이름: dict(html=..., w=폭, h=높이, transparent=True면 바깥 배경 투명)
+# 쓰는 삽화만 등록한다 (등록한 것만 빌드 때 그림으로 만든다). 견본을 쓰려면 아래 줄의 # 을 지운다.
 ILLUSTRATIONS = {
-    "ill-example": dict(html=EXAMPLE, w=320, h=180, transparent=True),
+    # "ill-example": dict(html=EXAMPLE, w=320, h=180, transparent=True),
 }

@@ -164,10 +164,26 @@ def _paragraphs(t: Text) -> list[list[Run]]:
     if not t.runs:
         return [[]]
     if isinstance(t.runs, str):
-        return [[Run(t.runs)]]
-    if all(isinstance(r, Run) for r in t.runs):
-        return [t.runs]
-    return [r if isinstance(r, list) else [r] for r in t.runs]
+        paras_ = [[Run(t.runs)]]
+    elif all(isinstance(r, Run) for r in t.runs):
+        paras_ = [t.runs]
+    else:
+        paras_ = [r if isinstance(r, list) else [r] for r in t.runs]
+    # 글 안의 "\n" 은 줄바꿈(새 문단)으로 처리한다
+    out = []
+    for para in paras_:
+        cur = []
+        for r in para:
+            pieces = r.text.split("\n")
+            for k, piece in enumerate(pieces):
+                if k:
+                    out.append(cur)
+                    cur = []
+                cur.append(Run(piece, r.bold, r.color, None, r.weight) if len(pieces) > 1 else r)
+                if len(pieces) > 1:
+                    cur[-1].size = r.size
+        out.append(cur)
+    return out
 
 
 # ---------------------------------------------------------------- pptx emit

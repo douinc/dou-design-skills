@@ -105,10 +105,11 @@ def stat_row(s, y, items, h=74):
     sw = (W - 2 * MX - (len(items) - 1) * gap) / len(items)
     for i, (v, u, l) in enumerate(items):
         x = MX + i * (sw + gap)
+        oy = (h - 74) / 2  # 카드를 키워도 숫자·설명이 세로 가운데에 오게
         s.add(Rect(x, y, sw, h, fill=CARD, radius=12),
-              Text(x + 18, y + 12, sw - 36, 36, runs((v, {"bold": True, "size": 26}), (" " + u, {"size": 11, "color": MUTED})),
+              Text(x + 18, y + oy + 12, sw - 36, 36, runs((v, {"bold": True, "size": 26}), (" " + u, {"size": 11, "color": MUTED})),
                    size=26, color=NAVY, line=1.1, valign="bottom"),
-              Text(x + 18, y + 48, sw - 36, 18, l, size=10.5, color=MUTED))
+              Text(x + 18, y + oy + 48, sw - 36, 18, l, size=10.5, color=MUTED))
     return y + h
 
 
@@ -219,8 +220,16 @@ def app_callouts(s, image, label, points, top=CONTENT_TOP + 6, bottom=648, side=
     k = len(points)
     rh = min(112, (bottom - top) / k)
     y0 = top + (bottom - top - rh * k) / 2
+    ys, prev = [], top
     for i, (t, d, yr) in enumerate(points):
-        y = y0 + i * rh
+        want = y0 + i * rh
+        if yr is not None:  # 화면 위 번호와 같은 높이에 설명을 둔다 (겹치지 않는 범위에서)
+            want = top + 6 + ph * yr - 18
+        y = min(max(want, prev), bottom - rh * (k - i))
+        ys.append(y)
+        prev = y + rh
+    for i, (t, d, yr) in enumerate(points):
+        y = ys[i]
         s.add(numbered(lx, y + 4, i + 1, size=28, bg=PRIMARY, fs=13),
               Text(lx + 44, y, lw - 44, 34, t, size=17, color=NAVY, weight=700, valign="middle"),
               Text(lx + 44, y + 36, lw - 44, rh - 48, d, size=12.5, color=MUTED, line=1.5))
@@ -260,3 +269,42 @@ def logo(name, x, y, h, white=False, align="left"):
 
 def logo_width(name, h):
     return h * _logo_ratio(LOGO_ALIAS.get(name, name))
+
+
+# ---------------------------------------------------------------- 주차별 일정표
+def gantt(s, x, y, w, weeks, phases, milestones=(), label_w=150, row_h=40, unit="주"):
+    """주차(또는 월) 일정 막대표.
+    phases: [(단계 이름, 시작, 끝, 설명 또는 ""), ...]  시작·끝은 1부터 세는 칸 번호(끝 포함)
+    milestones: [(칸 번호, "산출물 이름"), ...] — 해당 칸 끝에 깃발과 이름
+    돌려주는 값: 표 아래 끝 y"""
+    cw = (w - label_w) / weeks
+    gx = x + label_w
+    s.add(Rect(x, y, w, 28, fill=CARD, radius=6))
+    for i in range(weeks):
+        s.add(Text(gx + i * cw, y, cw, 28, f"{i + 1}{unit}" if cw >= 34 else str(i + 1), size=10, color=MUTED, weight=700, align="center", valign="middle"))
+    top = y + 28
+    body_h = len(phases) * row_h
+    for i in range(1, weeks):
+        s.add(Line(gx + i * cw, top, gx + i * cw, top + body_h, color=BORDER, w=1, dash=True))
+    shades = [PRIMARY, PRIMARY_DK, NAVY]
+    bh = min(row_h - 18, 30)  # 줄이 높아져도 막대는 얇게 유지
+    for r, (name, a, b, desc) in enumerate(phases):
+        ry = top + r * row_h
+        by = ry + (row_h - bh) / 2
+        s.add(Text(x + 8, ry, label_w - 16, row_h, name, size=12, color=NAVY, weight=700, valign="middle"),
+              Rect(gx + (a - 1) * cw + 3, by, (b - a + 1) * cw - 6, bh, fill=shades[r % 3] if not desc else TINT, radius=bh / 2))
+        if desc:
+            s.add(Rect(gx + (a - 1) * cw + 3, by, 5, bh, fill=PRIMARY, radius=2.5),
+                  Text(gx + (a - 1) * cw + 14, by, (b - a + 1) * cw - 20, bh, desc, size=10, color=PRIMARY_DK, weight=500, valign="middle", line=1.1))
+        s.add(Line(x, ry + row_h, x + w, ry + row_h, color=BORDER, w=1))
+    end = top + body_h
+    if milestones:
+        s.add(Text(x + 8, end, label_w - 16, 44, "산출물", size=12, color=NAVY, weight=700, valign="middle"))
+        for wk, name in milestones:
+            mx = gx + wk * cw
+            s.add(Line(mx, top, mx, end + 8, color=ORANGE, w=1.5),
+                  Icon("flag", mx - 8, end + 6, 16, ORANGE),
+                  Text(min(max(mx - 60, x), x + w - 120), end + 24, 120, 18, name, size=10, color=INK, weight=500,
+                       align="right" if mx + 60 > x + w else "center"))
+        end += 44
+    return end

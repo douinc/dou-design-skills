@@ -15,6 +15,7 @@
 9. 내용이 많은 장 견본
 10. 앱·웹 화면 (흐름 / 화면 설명 / 앱+웹)
 11. 로고와 여러 기관 색 구분
+12. 주차별 일정표 + 조직 (수행조직·추진일정)
 
 ---
 
@@ -163,11 +164,13 @@ org_chart(s, ("홍길동", "대표이사", "영업 · 연구 · 개발 총괄"),
 - 빌드 후 `python3 check_fit.py` → "넘침 없음"이 나올 때까지 문구를 줄이거나 상자를 키웁니다.
 - 22px 미만 글자는 엔진이 자동으로 1.2px 키웁니다(`TEXT_BUMP`). 좌표는 원래 크기로 잡으면 됩니다.
 - 쓸 수 있는 아이콘 이름은 `python3 list_icons.py` 로 봅니다. 없으면 Lucide 아이콘 SVG path 를 추가합니다.
-- 색은 `theme.py` 토큰만 씁니다: PRIMARY, PRIMARY_DK, NAVY, INK, MUTED, LIGHT, BORDER, CARD, TINT, ORANGE(경고 1곳), GREEN, RED, WHITE.
+- 색은 `theme.py` 토큰만 씁니다: PRIMARY, PRIMARY_DK, NAVY, INK, MUTED, LIGHT, BORDER, CARD, TINT, ORANGE, GREEN, RED, WHITE. ORANGE 는 한 장에서 **한 가지 의미**(경고, 또는 마감·산출물 시점)에만 씁니다.
+- **줄바꿈**: 글 안에 `"첫 줄\n둘째 줄"` 처럼 `\n` 을 넣으면 줄이 바뀝니다(휴대폰 자리 라벨도 같음). 줄마다 색·굵기를 다르게 하려면 `paras(...)`.
 
 ## 9. 내용이 많은 장 견본
 10. 앱·웹 화면 (흐름 / 화면 설명 / 앱+웹)
 11. 로고와 여러 기관 색 구분
+12. 주차별 일정표 + 조직 (수행조직·추진일정)
 
 제안·기술평가처럼 한 장에 표·숫자·화면을 같이 보여줘야 할 때는 **references/examples/dense_slide.py** 를 봅니다.
 왼쪽 표(4행)와 측정지표 문단, 오른쪽 짙은 숫자 패널과 제품 화면 모형이 한 장에 들어갑니다. 화면 모형은 illustrations.md 견본 D 를 `app-mock` 이름으로 등록해 씁니다.
@@ -205,11 +208,13 @@ app_callouts(s, None, "초안 확인 화면", [
 items, ph = phone_slot(MX + 60, CONTENT_TOP + 20, 210, "앱 · 기록 화면")
 s.add(items)
 s.add(Icon("arrow-right", MX + 330, CONTENT_TOP + 20 + ph / 2 - 14, 28, PRIMARY))
-s.add(browser_slot(MX + 400, CONTENT_TOP + 20, W - 2 * MX - 400, ph, "웹 콘솔 · 기록 목록"))
+s.add(browser_slot(MX + 400, CONTENT_TOP + 14, W - 2 * MX - 400, ph + 12, "웹 콘솔 · 기록 목록"))
 ```
+휴대폰 자리는 바깥 틀이 사방 6px 더 크게 그려집니다. 그래서 웹 창은 **y 를 6 올리고 높이를 12 키워야** 위아래 끝이 맞습니다(위 코드가 그렇게 되어 있음).
 `phone_slot` 은 (도형 목록, 높이) 를 돌려주고, `browser_slot` 은 도형 목록만 돌려줍니다. 휴대폰 폭 210 이면 높이 455 — 본문 영역에 맞추려면 폭 230 이하.
 
 ## 11. 로고와 여러 기관 색 구분
+12. 주차별 일정표 + 조직 (수행조직·추진일정)
 
 **서비스 로고 줄 세우기**
 ```python
@@ -236,3 +241,33 @@ for i, (name, fill, text, tint, img) in enumerate(orgs):
     # 로고: 도우 서비스는 logo(...), 외부 기관은 Image(파일, x, y, w, h) — w:h 는 원본 비율 그대로
 ```
 표 안에서 담당 기관을 표시할 때는 칸에 `runs(("도우", {"color": PRIMARY_DK, "bold": True}))`, `runs(("OO병원", {"color": HOSP_TEXT, "bold": True}))` 처럼 **글자색(둘째 값)** 을 씁니다.
+
+## 12. 주차별 일정표 + 조직
+
+기술평가의 "수행조직 및 추진일정"처럼 한 장에 조직과 일정을 같이 둘 때. 일정은 `layouts.gantt` 를 씁니다.
+
+```python
+s.add(header("MANAGEMENT", "수행조직 및 추진일정", "4명이 12주 동안 다섯 단계로 수행하고, 단계마다 산출물로 확인받습니다."))
+# 왼쪽: 조직 — org_chart 는 전체 폭용이라, 좁은 칸에서는 카드 목록으로 직접 그린다
+lx, lw = MX, 420
+people = [("홍길동", "PM", "특급", 100), ("김철수", "개발 PL", "고급", 100), ("이영희", "AI 엔지니어", "특급", 100), ("박민지", "UX", "중급", 50)]
+y = CONTENT_TOP
+for i, (nm, role, grade, pct) in enumerate(people):
+    head = i == 0
+    s.add(Rect(lx, y, lw, 104, fill=NAVY if head else CARD, radius=14),
+          Text(lx + 22, y + 18, 200, 28, runs((nm, {"bold": True, "size": 18}), ("  " + role, {"size": 12})), size=18, color=WHITE if head else NAVY),
+          pill(lx + lw - 86, y + 20, grade, fill=WHITE if not head else "#1B2A55", color=PRIMARY if not head else "#93C5FD", size=11, w=64),
+          Rect(lx + 22, y + 70, lw - 120, 8, fill="#1B2A55" if head else BORDER, radius=4),
+          Rect(lx + 22, y + 70, (lw - 120) * pct / 100, 8, fill="#93C5FD" if head else PRIMARY, radius=4),
+          Text(lx + lw - 90, y + 62, 70, 24, f"{pct}%", size=12, color=WHITE if head else NAVY, weight=700, align="right", valign="middle"))
+    y += 120
+# 오른쪽: 일정
+rx = lx + lw + 32
+end = gantt(s, rx, CONTENT_TOP, W - MX - rx, 12,
+            [("착수·분석", 1, 2, ""), ("설계·개발", 3, 6, ""), ("연계·시험", 7, 9, ""), ("교육·전환", 10, 11, ""), ("완료보고", 12, 12, "")],
+            milestones=[(2, "착수보고서"), (6, "설계서"), (9, "시험결과서"), (12, "완료보고서")], row_h=82)
+```
+- `row_h` 는 본문 아래(≈y 640)까지 채우도록 정합니다: (640 − 시작 y − 28 − 44) ÷ 단계 수.
+- 막대 안에 짧은 설명을 넣으려면 단계의 넷째 값에 글을 넣습니다(연한 막대 + 글자). 비우면 진한 막대.
+- 12칸이 넘으면(예: 24주) `unit="월"` 로 바꿔 월 단위로 줄이거나, 칸 번호만 표시됩니다.
+- 산출물 이름이 서로 붙으면(연속 주차) 이름을 짧게 쓰거나 표로 따로 둡니다.
