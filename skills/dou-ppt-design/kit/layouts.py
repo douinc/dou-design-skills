@@ -308,3 +308,22 @@ def gantt(s, x, y, w, weeks, phases, milestones=(), label_w=150, row_h=40, unit=
                        align="right" if mx + 60 > x + w else "center"))
         end += 44
     return end
+
+
+# ---------------------------------------------------------------- 부록
+def appendix_divider(s, items, title="부록 · 질의응답 참고자료"):
+    """부록 간지 — 옅은 파란 원 배경 + 부록 목록. 맺음 장 뒤, 부록 첫 장 앞에 둔다.
+    items: [("A1", "업무분장"), ("A2", "수행 실적"), ...] — 5개씩 한 줄로 나눠 적는다."""
+    s.balance = False
+    s.add(Image("rings.png", 0, 0, W, H),
+          Rect(MX, 300, 3, 14, fill=PRIMARY),
+          Text(MX + 11, 297, 600, 20, "APPENDIX", size=12, color=PRIMARY, weight=700, letter=0.5),
+          Text(MX, 322, 900, 50, title, size=34, color=NAVY, weight=700))
+    lines = [" · ".join(f"{c} {t}" for c, t in items[i:i + 5]) for i in range(0, len(items), 5)]
+    if lines:
+        s.add(Text(MX, 380, 900, 22 * len(lines) + 10, paras(*lines), size=13, color=MUTED, line=1.6))
+
+
+def apx_header(code, title, sub="", ref=""):
+    """부록 장 제목 — 라벨이 'APPENDIX A3' 처럼 붙는다. 본문 header 와 같은 모양."""
+    return header(f"APPENDIX {code}", title, sub, ref)

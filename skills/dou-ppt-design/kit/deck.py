@@ -2,7 +2,7 @@
 import theme
 from engine import Slide, Rect, Text, Line, Icon, Image, Run, runs, paras, W, H
 from theme import *  # noqa
-from layouts import cover, agenda, divider, closing, stat_row, org_chart, gantt, logo, logo_width, app_flow, app_callouts, phone_slot, browser_slot
+from layouts import cover, agenda, divider, closing, appendix_divider, apx_header, stat_row, org_chart, gantt, logo, logo_width, app_flow, app_callouts, phone_slot, browser_slot
 
 TITLE = "발표자료"                     # 결과 파일 이름 (.pptx)
 theme.FOOT = "발표 제목 · 주식회사 도우"  # 모든 장 아래 한 줄
