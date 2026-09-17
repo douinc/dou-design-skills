@@ -236,7 +236,7 @@ def app_callouts(s, image, label, points, top=CONTENT_TOP + 6, bottom=648, side=
 # ---------------------------------------------------------------- 회사·서비스 로고
 # assets/logos/<파일>.svg 를 빌드 때 PNG(원래 색 / 흰색) 로 자동 변환해 쓴다.
 # 새 로고는 SVG 를 그 폴더에 넣고 아래 별칭에 한 줄 추가하면 된다.
-LOGO_ALIAS = {"도우": "ci", "dou": "ci", "새록": "saylog", "미리봄": "miribom", "약먹자": "yakmeokja", "수발": "subal"}
+LOGO_ALIAS = {"도우": "ci", "dou": "ci", "새록": "saylog", "미리봄": "miribom", "약먹자": "yakmeokja", "수발": "subal", "실마리": "subal"}
 
 
 def _logo_ratio(key):
