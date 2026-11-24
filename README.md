@@ -44,6 +44,7 @@ npx skills add https://github.com/douinc/dou-design-skills.git --skill dou-produ
 | [saylog-ux-writing-korean](./skills/saylog-ux-writing-korean/) | Saylog UI 문구의 톤 규칙과 기존 문구 대조 절차 (앱·웹 콘솔·새록 라이브 공통) |
 | [dou-ppt-design](./skills/dou-ppt-design/) | 도우 스타일 발표자료를 편집 가능한 파워포인트로 만드는 워크플로우 (표·삽화·조직도·앱 화면 자리 포함) |
 | [saylog-manual-authoring](./skills/saylog-manual-authoring/) | Saylog 화면 스크린샷과 설명으로 A4 사용자 매뉴얼을 만들거나 수정하는 워크플로우 |
+| [dou-intro-video](./skills/dou-intro-video/) | 도우 서비스 소개·홍보 영상을 새록·미리봄 부스 영상 품질로 만드는 워크플로우 (제작 틀은 비공개 douinc/booth-design — douinc 권한 필요) |
 
 ## Skill 간 의존성
 
