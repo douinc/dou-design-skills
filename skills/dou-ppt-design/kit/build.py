@@ -45,16 +45,20 @@ if todo:
     json.dump(stamps, open(stamp_path, "w"))
 
 # 로고: assets/logos/*.svg 중 PNG 가 없거나 SVG 가 더 새것이면 원래 색·흰색 두 벌을 굽는다
+# 흰색 버전은 보통 전체를 흰색으로 칠해 만든다. 아이콘 색을 살려야 하는 로고(예: 새록)는
+# <이름>-white.svg 를 따로 두면 그 파일을 그대로 짙은 바탕용으로 쓴다.
 logo_dir = os.path.join(HERE, "assets", "logos")
 jobs = []
 for fn in sorted(os.listdir(logo_dir)) if os.path.isdir(logo_dir) else []:
-    if not fn.endswith(".svg"):
+    if not fn.endswith(".svg") or fn.endswith("-white.svg"):
         continue
     src = os.path.join(logo_dir, fn)
     for white in (False, True):
         out = os.path.join(logo_dir, fn[:-4] + ("-white" if white else "") + ".png")
-        if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
-            jobs.append({"out": out, "svg": open(src, encoding="utf-8").read(), "white": white})
+        own = os.path.join(logo_dir, fn[:-4] + "-white.svg")
+        use = own if white and os.path.exists(own) else src
+        if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(use):
+            jobs.append({"out": out, "svg": open(use, encoding="utf-8").read(), "white": white and use == src})
 if jobs:
     job = os.path.join(HERE, "preview", "_logos.json")
     os.makedirs(os.path.dirname(job), exist_ok=True)
